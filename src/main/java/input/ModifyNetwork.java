@@ -13,11 +13,9 @@ import org.matsim.core.network.io.NetworkWriter;
 
 
 public class ModifyNetwork {
-	static String inputNetwork = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/input/berlin-v5-input.xml.gz" ;
-	static String inputLinks = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/input/linksToPedestrianize.txt" ;
+	private static String inputNetwork = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/input/berlin-v5-network.xml" ;
+	private static String inputLinks = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/input/linksToPedestrianize.txt" ;
 	private static String outputFile = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/input/network_modified.xml.gz";
-
-
 
 	public static void main(String[] args) {
 
@@ -34,7 +32,6 @@ public class ModifyNetwork {
 				i.setCapacity(0.);
 			}
 		}
-
 
 		// write new network to file
 		new NetworkWriter(network).write(outputFile);
