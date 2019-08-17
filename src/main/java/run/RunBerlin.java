@@ -6,7 +6,6 @@ import org.matsim.api.core.v01.TransportMode;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.config.groups.PlanCalcScoreConfigGroup.ActivityParams;
-import org.matsim.core.config.groups.VspExperimentalConfigGroup;
 import org.matsim.core.controler.AbstractModule;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.scenario.ScenarioUtils;
@@ -14,13 +13,12 @@ import org.matsim.vehicles.VehicleType;
 import org.matsim.vehicles.VehiclesFactory;
 import java.io.File;
 
-import static org.matsim.core.config.groups.ControlerConfigGroup.RoutingAlgorithmType.FastAStarLandmarks;
 
 
 public class RunBerlin {
 
     public static void main(String[] args) {
-        String version = "2019-08-16/B";
+        String version = "2019-08-16/C-First_Full_Attempt";
         String rootPath = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/";
 
         // -- C O N F I G --
@@ -43,11 +41,10 @@ public class RunBerlin {
 
 //        config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.failIfDirectoryExists);
 
-        config.controler().setLastIteration(10);
-        config.controler().setLastIteration(10);
+        config.controler().setLastIteration(500);
         config.controler().setOutputDirectory(outputDirectory);
-        config.controler().setWritePlansInterval(5);
-        config.controler().setWriteEventsInterval(5);
+        config.controler().setWritePlansInterval(10);
+        config.controler().setWriteEventsInterval(10);
 
 
         // Scoring
