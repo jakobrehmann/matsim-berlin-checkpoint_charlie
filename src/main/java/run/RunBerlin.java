@@ -1,5 +1,7 @@
 package run;
 
+import ch.sbb.matsim.config.SwissRailRaptorConfigGroup;
+import ch.sbb.matsim.routing.pt.raptor.SwissRailRaptorModule;
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
 import org.matsim.api.core.v01.TransportMode;
@@ -18,7 +20,7 @@ import java.io.File;
 public class RunBerlin {
 
     public static void main(String[] args) {
-        String version = "2019-08-16/C-First_Full_Attempt";
+        String version = "2019-08-17/B-FullRunRaptor";
         String rootPath = "C:/Users/jakob/Dropbox/Documents/Education-TUB/2019_SS/NahMob/simulation/";
 
         // -- C O N F I G --
@@ -41,10 +43,10 @@ public class RunBerlin {
 
 //        config.controler().setOverwriteFileSetting(OutputDirectoryHierarchy.OverwriteFileSetting.failIfDirectoryExists);
 
-        config.controler().setLastIteration(500);
+        config.controler().setLastIteration(300);
         config.controler().setOutputDirectory(outputDirectory);
-        config.controler().setWritePlansInterval(10);
-        config.controler().setWriteEventsInterval(10);
+        config.controler().setWritePlansInterval(50);
+        config.controler().setWriteEventsInterval(50);
 
 
         // Scoring
@@ -58,6 +60,10 @@ public class RunBerlin {
         config.plansCalcRoute().removeModeRoutingParams(TransportMode.bike);
         config.plansCalcRoute().removeModeRoutingParams("undefined");
 
+        // Raptor
+        SwissRailRaptorConfigGroup raptor = new SwissRailRaptorConfigGroup();
+        config.addModule(raptor);
+
         // -- S C E N A R I O --
         Scenario scenario = ScenarioUtils.loadScenario( config );
 
@@ -70,7 +76,7 @@ public class RunBerlin {
 
         // -- C O N T R O L E R --
         Controler controler = new Controler( scenario );
-//        controler.addOverridingModule(new SwissRailRaptorModule());
+        controler.addOverridingModule(new SwissRailRaptorModule());
 
         // use the (congested) car travel time for the teleported ride mode
         controler.addOverridingModule( new AbstractModule() {
